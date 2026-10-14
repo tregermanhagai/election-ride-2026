@@ -21,7 +21,7 @@
 <body>
 
 <header class="bar">
-  <a class="me" href="https://hagaitregerman.onrender.com/" aria-label="לדף האישי שלי">
+  <a class="me" href="https://hagaitregerman.onrender.com/" target="_blank" rel="noopener" aria-label="לדף האישי שלי (נפתח בלשונית חדשה)">
     <img src="assets/hagai-400.jpg" width="400" height="400" alt="חגי, מתנדב ההסעות">
   </a>
   <a class="btn btn--blue js-wa" href="https://wa.me/972545966296" target="_blank" rel="noopener">צור קשר</a>
@@ -30,22 +30,18 @@
 <main>
   <section class="hero" aria-labelledby="q1">
     <div class="hero__text">
+      <div class="mini reveal" id="countdown" dir="ltr" role="timer" aria-label="הזמן שנותר עד 21:00 ביום הבחירות">
+        <div><span data-u="d">--</span><small>ימים</small></div>
+        <div><span data-u="h">--</span><small>שעות</small></div>
+        <div><span data-u="m">--</span><small>דקות</small></div>
+        <div><span data-u="s">--</span><small>שניות</small></div>
+      </div>
       <h1 id="q1" class="display reveal">עושים שינוי</h1>
-      <p class="lead reveal">ביום שלישי, 27.10.2026, כל קול נספר. ומי שצריך עזרה להגיע לקלפי, מקבל אותה.</p>
+      <p class="lead reveal">ביום שלישי, 27.10.2026, כל קול נספר.<br>צריכים עזרה להגיע לקלפי (או למצוא את הקלפי)?<br>אנחנו פה בשבילכם!</p>
     </div>
     <img class="hero__flag reveal" src="assets/flag.webp" width="1400" height="918" alt="דגל ישראל">
   </section>
 
-  <section class="clock" aria-labelledby="clock-title">
-    <h2 id="clock-title" class="clock__title reveal">עד <span dir="ltr">21:00</span> ביום הבחירות נשארו</h2>
-    <div class="clock__digits reveal" id="countdown" role="timer" aria-live="off">
-      <div><span data-u="d">--</span><small>ימים</small></div>
-      <div><span data-u="h">--</span><small>שעות</small></div>
-      <div><span data-u="m">--</span><small>דקות</small></div>
-      <div><span data-u="s">--</span><small>שניות</small></div>
-    </div>
-    <p class="clock__note reveal" id="countdown-note">יום שלישי, 27 באוקטובר 2026, בשעה 21:00.</p>
-  </section>
 
   <section class="ask" aria-labelledby="q2">
     <h2 id="q2" class="head reveal">צריך עזרה בהגעה לקלפי?</h2>
@@ -81,7 +77,7 @@
 <footer class="foot">
   <div class="foot__cols">
     <ul><li>יום הבחירות</li><li>יום שלישי, 27.10.2026</li><li>שעון ספירה עד 21:00</li></ul>
-    <ul><li>קישורים</li><li><a href="https://hagaitregerman.onrender.com/">הדף האישי שלי</a></li><li><a href="https://www.bechirot.gov.il/" target="_blank" rel="noopener">ועדת הבחירות המרכזית</a></li></ul>
+    <ul><li>קישורים</li><li><a href="https://hagaitregerman.onrender.com/" target="_blank" rel="noopener">הדף האישי שלי</a></li><li><a href="https://www.bechirot.gov.il/" target="_blank" rel="noopener">ועדת הבחירות המרכזית</a></li></ul>
     <ul><li>קשר</li><li><a class="js-wa" href="https://wa.me/972545966296" target="_blank" rel="noopener">ווטסאפ</a></li><li dir="ltr">054-596-6296</li></ul>
   </div>
   <p class="foot__mark" dir="ltr" aria-hidden="true">27.10.26</p>

@@ -10,24 +10,27 @@ const waUrl = `https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`;
 document.querySelectorAll(".js-wa").forEach((a) => { a.href = waUrl; });
 
 // Countdown
-const units = {};
-document.querySelectorAll("#countdown [data-u]").forEach((el) => { units[el.dataset.u] = el; });
+// Every [data-u] cell (the small clock in the hero and the big one below) shows the same unit
+const cells = { d: [], h: [], m: [], s: [] };
+document.querySelectorAll("[data-u]").forEach((el) => { cells[el.dataset.u].push(el); });
+const set = (u, v) => cells[u].forEach((el) => { el.textContent = v; });
 let timer;
 const pad = (n) => String(n).padStart(2, "0");
 
 function tick() {
   const left = TARGET - Date.now();
   if (left <= 0) {
-    document.getElementById("clock-title").textContent = "הקלפיות נסגרו. תודה שהצבעתם!";
-    Object.values(units).forEach((el) => { el.textContent = "00"; });
+    const clock = document.getElementById("countdown");
+    clock.setAttribute("dir", "rtl");
+    clock.textContent = "הקלפיות נסגרו. תודה שהצבעתם!";
     clearInterval(timer);
     return;
   }
   const s = Math.floor(left / 1000);
-  units.d.textContent = pad(Math.floor(s / 86400));
-  units.h.textContent = pad(Math.floor((s % 86400) / 3600));
-  units.m.textContent = pad(Math.floor((s % 3600) / 60));
-  units.s.textContent = pad(s % 60);
+  set("d", pad(Math.floor(s / 86400)));
+  set("h", pad(Math.floor((s % 86400) / 3600)));
+  set("m", pad(Math.floor((s % 3600) / 60)));
+  set("s", pad(s % 60));
 }
 timer = setInterval(tick, 1000);
 tick();
