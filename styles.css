@@ -54,20 +54,21 @@ a { color: inherit; }
 .btn--blue:active { transform: translateY(0) scale(0.97); }
 .btn--big { font-size: var(--step-lead); padding: 20px 40px; }
 
-/* Hero: the photo fills the screen, the words sit on its white side (right) */
+/* Hero: the photo sits faded in the background, the words run over it */
 .hero {
   position: relative; overflow: hidden;
   min-height: 92svh;
   display: flex; align-items: center;
   padding: 150px var(--margin) 64px;
 }
-.hero__bg { position: absolute; inset: 0; z-index: 0; }
+.hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero__bg img {
-  width: 100%; height: 100%; object-fit: contain; object-position: left bottom;
+  width: 100%; height: 100%; object-fit: cover; object-position: left center;
+  opacity: 0.3;
   animation: drift 18s ease-in-out infinite alternate; transform-origin: 20% 100%;
 }
 @keyframes drift { from { transform: scale(1); } to { transform: scale(1.05); } }
-.hero__text { position: relative; z-index: 1; width: min(42%, 720px); margin-inline-start: 0; }
+.hero__text { position: relative; z-index: 1; width: min(56%, 820px); }
 .display {
   margin: 0; font-weight: 800; font-size: var(--step-display);
   line-height: 0.92; letter-spacing: -0.03em; text-wrap: balance;
@@ -143,12 +144,12 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
 .js .reveal.in { opacity: 1; transform: none; }
 
-/* Below this width the photo no longer leaves room beside the words: stack them */
+/* Narrow screens: the photo fills the lower part of the screen behind the words */
 @media (max-width: 1100px) {
-  .hero { display: block; padding: 128px var(--margin) 0; min-height: auto; }
+  .hero { min-height: 88svh; align-items: flex-start; padding-top: 136px; }
   .hero__text { width: auto; }
-  .hero__bg { position: static; display: block; margin: 32px calc(-1 * var(--margin)) 0; }
-  .hero__bg img { height: auto; animation: none; }
+  .hero__bg { top: auto; height: 80%; }
+  .hero__bg img { object-fit: contain; object-position: center bottom; opacity: 0.3; }
 }
 
 @media (max-width: 760px) {
