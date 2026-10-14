@@ -91,6 +91,7 @@ a { color: inherit; }
 .step:nth-child(4) { margin-inline-start: 27%; }
 .step__line { margin: 0; font-weight: 800; font-size: clamp(2rem, 1rem + 3.6vw, 4.5rem); line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
 .step__line--last { color: var(--blue); }
+.star { color: var(--blue); text-decoration: none; margin-inline-start: 2px; }
 .step__note { margin: 12px 0 0; max-width: 34ch; color: var(--muted); }
 
 /* FAQ */
@@ -133,7 +134,7 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
   margin: 18vh 0 0; font-weight: 800; font-size: 23vw; line-height: 0.85;
   letter-spacing: -0.05em; text-align: left;
 }
-.foot__legal { margin: 16px 0 0; font-size: var(--step-small); }
+.foot__legal { margin: 8px 0 0; font-size: var(--step-small); }
 
 /* Entrances (only when script runs) */
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
