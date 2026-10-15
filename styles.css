@@ -52,6 +52,17 @@ a { color: inherit; }
 .btn--blue { background: var(--blue); color: var(--blue-ink); }
 .btn--blue:hover { background: var(--navy); transform: translateY(-2px); }
 .btn--blue:active { transform: translateY(0) scale(0.97); }
+/* The top contact button is an Israeli flag: white field, two blue stripes, a Star of David */
+.btn--flag {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: var(--step-lead); font-weight: 800; color: var(--blue);
+  padding: 22px 34px; border-radius: 6px;
+  background: linear-gradient(to bottom, #fff 0 9%, var(--blue) 9% 23%, #fff 23% 77%, var(--blue) 77% 91%, #fff 91%);
+  box-shadow: 0 0 0 1px #d5dcef;
+}
+.btn--flag:hover { transform: translateY(-2px) rotate(-1deg); }
+.btn--flag:active { transform: scale(0.97); }
+.btn__star { width: 1.3em; height: 1.3em; flex: none; }
 .btn--big { font-size: var(--step-lead); padding: 20px 40px; }
 
 /* Hero: the photo sits faded in the background, the words run over it */
@@ -132,10 +143,10 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 /* Contact: the number as display type */
 .contact {
   background: var(--navy); color: var(--blue-ink);
-  min-height: 80svh; display: flex; flex-direction: column; justify-content: space-between;
-  padding: 48px var(--margin) 12vh;
+  display: flex; flex-direction: column; gap: clamp(20px, 3vw, 40px);
+  padding: clamp(48px, 6vw, 80px) var(--margin);
 }
-.contact__line { margin: 0; font-size: var(--step-lead); max-width: 26ch; }
+.contact__line { margin: 0; font-size: var(--step-lead); max-width: 40ch; }
 .contact__number {
   font-weight: 800; font-size: clamp(3rem, 0.5rem + 11vw, 12rem); line-height: 1;
   letter-spacing: -0.04em; text-decoration: none; text-align: right;
@@ -183,5 +194,5 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 @media (prefers-reduced-motion: reduce) {
   .hero__bg img { animation: none; transition: none; }
   .js .reveal { transform: none; transition: opacity .3s; }
-  .me:hover, .btn--blue:hover { transform: none; }
+  .me:hover, .btn--blue:hover, .btn--flag:hover { transform: none; }
 }
