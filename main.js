@@ -35,6 +35,25 @@ function tick() {
 timer = setInterval(tick, 1000);
 tick();
 
+// Hero slideshow: a slow crossfade to the next picture every 7 seconds
+const slides = [...document.querySelectorAll(".hero__bg .slide")];
+const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (slides.length > 1 && !calm) {
+  let current = 0;
+  const imgOf = (i) => slides[i].querySelector("img");
+  setInterval(async () => {
+    if (document.hidden) return;
+    const next = (current + 1) % slides.length;
+    const img = imgOf(next);
+    img.loading = "eager";
+    try { await img.decode(); } catch { return; } // not loaded yet: try again next round
+    slides[current].classList.remove("is-on");
+    slides[next].classList.add("is-on");
+    current = next;
+  }, 7000);
+  imgOf(1).loading = "eager"; // fetch the second picture early
+}
+
 // Staggered entrances, once per element
 const io = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {

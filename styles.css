@@ -62,11 +62,14 @@ a { color: inherit; }
   padding: 150px var(--margin) 64px;
 }
 .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* Slideshow: every picture is stacked in place; the one marked is-on fades in */
 .hero__bg img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover; object-position: left center;
-  opacity: 0.3;
+  opacity: 0; transition: opacity 2.5s ease-in-out;
   animation: drift 18s ease-in-out infinite alternate; transform-origin: 20% 100%;
 }
+.hero__bg .is-on img { opacity: 0.3; }
 @keyframes drift { from { transform: scale(1); } to { transform: scale(1.05); } }
 .hero__text { position: relative; z-index: 1; width: min(56%, 820px); }
 .display {
@@ -149,7 +152,7 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
   .hero { min-height: 88svh; align-items: flex-start; padding-top: 136px; }
   .hero__text { width: auto; }
   .hero__bg { top: auto; height: 80%; }
-  .hero__bg img { object-fit: contain; object-position: center bottom; opacity: 0.3; }
+  .hero__bg img { object-fit: contain; object-position: center bottom; }
 }
 
 @media (max-width: 760px) {
@@ -165,7 +168,7 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__bg img { animation: none; }
+  .hero__bg img { animation: none; transition: none; }
   .js .reveal { transform: none; transition: opacity .3s; }
   .me:hover, .btn--blue:hover { transform: none; }
 }
