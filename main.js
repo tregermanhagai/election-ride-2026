@@ -35,23 +35,53 @@ function tick() {
 timer = setInterval(tick, 1000);
 tick();
 
-// Hero slideshow: a slow crossfade to the next picture every 7 seconds
+// Hero: every 5 seconds the background picture crossfades and the city name changes
+const CITIES = ["ירושלים", "תל אביב-יפו", "חיפה", "ראשון לציון", "פתח תקווה", "אשדוד", "נתניה", "באר שבע", "בני ברק", "חולון", "רמת גן"];
 const slides = [...document.querySelectorAll(".hero__bg .slide")];
+const cityEl = document.getElementById("city");
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (slides.length > 1 && !calm) {
-  let current = 0;
+const STEP = 5000;
+const LETTER_DELAY = 35;
+
+// Each letter is its own span so it can move with its own delay (spaces kept as no-break spaces)
+const lettersOf = (word) => [...`${word},`].map((ch) => {
+  const span = document.createElement("span");
+  span.textContent = ch === " " ? " " : ch;
+  return span;
+});
+
+function showCity(word) {
+  const old = [...cityEl.children];
+  old.forEach((span, i) => { span.style.transitionDelay = `${i * LETTER_DELAY}ms`; span.classList.add("out"); });
+  const outTime = old.length * LETTER_DELAY + 450;
+  setTimeout(() => {
+    const fresh = lettersOf(word);
+    fresh.forEach((span) => span.classList.add("pre"));
+    cityEl.replaceChildren(...fresh);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      fresh.forEach((span, i) => { span.style.transitionDelay = `${i * LETTER_DELAY}ms`; span.classList.remove("pre"); });
+    }));
+  }, outTime);
+}
+
+if (!calm) {
+  let slide = 0, city = 0;
   const imgOf = (i) => slides[i].querySelector("img");
+  cityEl.replaceChildren(...lettersOf(CITIES[0]));
   setInterval(async () => {
     if (document.hidden) return;
-    const next = (current + 1) % slides.length;
+    city = (city + 1) % CITIES.length;
+    showCity(CITIES[city]);
+    if (slides.length < 2) return;
+    const next = (slide + 1) % slides.length;
     const img = imgOf(next);
     img.loading = "eager";
     try { await img.decode(); } catch { return; } // not loaded yet: try again next round
-    slides[current].classList.remove("is-on");
+    slides[slide].classList.remove("is-on");
     slides[next].classList.add("is-on");
-    current = next;
-  }, 7000);
-  imgOf(1).loading = "eager"; // fetch the second picture early
+    slide = next;
+  }, STEP);
+  if (slides.length > 1) imgOf(1).loading = "eager"; // fetch the second picture early
 }
 
 // Staggered entrances, once per element

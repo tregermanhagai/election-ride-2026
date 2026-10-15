@@ -72,6 +72,19 @@ a { color: inherit; }
 .hero__bg .is-on img { opacity: 0.3; }
 @keyframes drift { from { transform: scale(1); } to { transform: scale(1.05); } }
 .hero__text { position: relative; z-index: 1; width: min(56%, 820px); }
+/* Rotating city above the headline; its letters leave and arrive one after another */
+.city {
+  margin: 0 0 6px; color: var(--blue); font-weight: 800;
+  font-size: clamp(2rem, 1rem + 3.4vw, 4.25rem); line-height: 1.05; letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.city span { display: inline-block; transition: opacity .45s var(--ease-out), transform .45s var(--ease-out); }
+.city span.out { opacity: 0; transform: translateY(-0.4em); }
+.city span.pre { opacity: 0; transform: translateY(0.4em); transition: none; }
+.hero__credit {
+  position: absolute; z-index: 1; left: var(--margin); bottom: 16px; margin: 0;
+  font-size: var(--step-small); color: var(--muted);
+}
 .display {
   margin: 0; font-weight: 800; font-size: var(--step-display);
   line-height: 0.92; letter-spacing: -0.03em; text-wrap: balance;
