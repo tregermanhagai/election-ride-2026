@@ -55,6 +55,10 @@ a { color: inherit; }
 /* The top contact button: larger than the rest */
 .btn--top { font-size: var(--step-lead); font-weight: 800; padding: 18px 38px; }
 .btn--big { font-size: var(--step-lead); padding: 20px 40px; }
+.btn--soft { background: var(--surface); color: var(--blue); }
+.btn--soft:hover { background: #dfe6f8; transform: translateY(-2px); }
+.btn--soft:active { transform: translateY(0) scale(0.97); }
+.ask__actions { display: flex; flex-wrap: wrap; gap: 16px; }
 
 /* Hero: the photo sits faded in the background, the words run over it */
 .hero {
@@ -179,7 +183,7 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
   .faq__list { margin-inline-start: 0; }
   details { padding: 16px 12px; }
   .foot__cols { grid-template-columns: 1fr 1fr; }
-  .btn--big { display: block; text-align: center; }
+  .btn--big { display: block; text-align: center; flex: 1 1 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
