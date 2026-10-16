@@ -1,7 +1,8 @@
 // Election day, 27.10.2026 at 21:00 Israel time (IST, UTC+2 after the clocks change on 25.10)
 const TARGET = new Date("2026-10-27T21:00:00+02:00").getTime();
 const PHONE = "972545966296";
-const MESSAGE = "היי חגי, אשמח לעזרה בהגעה לקלפי ביום הבחירות (27.10).\nכתובת איסוף: \nשעה מועדפת: \nמספר נוסעים: ";
+// A page can set its own prefilled message with data-wa-message on <body>
+const MESSAGE = document.body.dataset.waMessage || "היי חגי, אשמח לעזרה בהגעה לקלפי ביום הבחירות (27.10).\nכתובת איסוף: \nשעה מועדפת: \nמספר נוסעים: ";
 
 document.documentElement.classList.add("js");
 
