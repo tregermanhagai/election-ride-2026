@@ -135,6 +135,9 @@ details[open] summary::after { transform: rotate(45deg); }
 summary:hover { color: var(--blue); }
 details p { margin: 14px 0 4px; max-width: 48ch; }
 
+/* Invitation to the balcony-sign page, between the FAQ and the contact band */
+.sign { padding: clamp(96px, 12vw, 180px) var(--margin); max-width: 1100px; }
+
 /* Contact: the number as display type */
 .contact {
   background: var(--navy); color: var(--blue-ink);
