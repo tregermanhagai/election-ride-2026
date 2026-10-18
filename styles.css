@@ -42,7 +42,8 @@ a { color: inherit; }
 .me { display: block; width: clamp(84px, 8vw, 124px); border-radius: 50%; transition: transform .25s var(--ease-out); }
 .me img { width: 100%; border-radius: 50%; }
 /* Text in place of the photo (the Tel Aviv page) */
-.wordmark { margin: 0; color: var(--blue); font-weight: 800; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); line-height: 1; letter-spacing: -0.02em; }
+.wordmark { margin: 0; text-decoration: none; text-underline-offset: 6px; color: var(--blue); font-weight: 800; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem); line-height: 1; letter-spacing: -0.02em; }
+a.wordmark:hover { text-decoration: underline; }
 .me:hover { transform: scale(1.05) rotate(-2deg); }
 .me:active { transform: scale(0.97); }
 
