@@ -157,7 +157,8 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 /* Footer */
 .foot { background: var(--blue); color: var(--blue-ink); padding: 48px var(--margin) 20px; }
 .foot__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
-.foot__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.foot__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; align-content: start; }
+.foot__cols li[dir="ltr"] { text-align: right; }
 .foot__cols li:first-child { font-weight: 600; }
 .foot__cols a { text-decoration: none; }
 .foot__cols a:hover { text-decoration: underline; }
