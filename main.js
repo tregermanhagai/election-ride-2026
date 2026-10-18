@@ -1,6 +1,7 @@
 // Election day, 27.10.2026 at 21:00 Israel time (IST, UTC+2 after the clocks change on 25.10)
 const TARGET = new Date("2026-10-27T21:00:00+02:00").getTime();
-const PHONE = "972545966296";
+// A page can set its own WhatsApp number with data-wa-phone on <body>
+const PHONE = document.body.dataset.waPhone || "972545966296";
 // A page can set its own prefilled message with data-wa-message on <body>
 const MESSAGE = document.body.dataset.waMessage || "היי חגי, אשמח לעזרה בהגעה לקלפי ביום הבחירות (27.10).\nכתובת איסוף: \nשעה מועדפת: \nמספר נוסעים: ";
 
@@ -37,7 +38,8 @@ timer = setInterval(tick, 1000);
 tick();
 
 // Hero: every 5 seconds the background picture crossfades and the city name changes
-const CITIES = ["ירושלים", "תל אביב-יפו", "חיפה", "ראשון לציון", "פתח תקווה", "אשדוד", "נתניה", "באר שבע", "בני ברק", "חולון", "רמת גן"];
+// A page can list its own places with data-places="a|b|c" on <body>
+const CITIES = document.body.dataset.places?.split("|") || ["ירושלים", "תל אביב-יפו", "חיפה", "ראשון לציון", "פתח תקווה", "אשדוד", "נתניה", "באר שבע", "בני ברק", "חולון", "רמת גן"];
 const slides = [...document.querySelectorAll(".hero__bg .slide")];
 const cityEl = document.getElementById("city");
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
