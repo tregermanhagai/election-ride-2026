@@ -98,3 +98,32 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+// Music toggle: nothing loads or plays until the visitor presses the button
+const musicBtn = document.getElementById("music");
+if (musicBtn) {
+  let audio, fadeId = 0;
+  const label = musicBtn.querySelector(".music__label");
+  const fadeTo = (target, ms) => {
+    const start = audio.volume, t0 = performance.now(), id = ++fadeId; // a newer fade cancels this one
+    const step = (t) => {
+      if (id !== fadeId) return;
+      const k = Math.min(1, (t - t0) / ms);
+      audio.volume = start + (target - start) * k;
+      if (k < 1) requestAnimationFrame(step); else if (target === 0) audio.pause();
+    };
+    requestAnimationFrame(step);
+  };
+  musicBtn.addEventListener("click", async () => {
+    if (!audio) { audio = new Audio(musicBtn.dataset.src); audio.loop = true; audio.volume = 0; }
+    const on = musicBtn.getAttribute("aria-pressed") !== "true";
+    musicBtn.setAttribute("aria-pressed", String(on));
+    label.textContent = on ? "השהה מוסיקה" : "נגן מוסיקה";
+    if (on) {
+      try { await audio.play(); fadeTo(0.35, 2000); }
+      catch { musicBtn.setAttribute("aria-pressed", "false"); label.textContent = "נגן מוסיקה"; }
+    } else {
+      fadeTo(0, 600);
+    }
+  });
+}

@@ -167,6 +167,22 @@ details p { margin: 14px 0 4px; max-width: 48ch; }
 }
 .foot__legal { margin: 8px 0 0; font-size: var(--step-small); }
 
+/* Music toggle (Tel Aviv page): off until the visitor presses it */
+.music {
+  position: fixed; z-index: 5; left: var(--margin); bottom: 20px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font: inherit; font-weight: 600; font-size: var(--step-small);
+  padding: 10px 16px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--navy); color: var(--blue-ink);
+  transition: transform .2s var(--ease-out), background-color .2s;
+}
+.music:hover { background: var(--blue); }
+.music:active { transform: scale(0.95); }
+.music__icon { width: 18px; height: 18px; fill: currentColor; }
+.music__pause, .music[aria-pressed="true"] .music__play { display: none; }
+.music[aria-pressed="true"] .music__pause { display: inline; }
+body:has(.music) .hero__credit { bottom: 72px; }
+
 /* Entrances (only when script runs) */
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
 .js .reveal.in { opacity: 1; transform: none; }
