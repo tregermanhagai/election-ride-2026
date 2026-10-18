@@ -99,15 +99,11 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-// Music: on by default. Browsers block sound until the visitor interacts with the page,
-// so we try at once and otherwise start on the first tap, click or key press (not on the button itself).
+// Music: off by default; nothing loads or plays until the visitor presses the button
 const musicBtn = document.getElementById("music");
 const MUSIC_VOLUME = 0.06; // very quiet, in the background
 if (musicBtn) {
-  const audio = new Audio(musicBtn.dataset.src);
-  audio.loop = true;
-  audio.volume = 0;
-  let fadeId = 0, stoppedByVisitor = false;
+  let audio, fadeId = 0;
   const label = musicBtn.querySelector(".music__label");
   const show = (on) => { musicBtn.setAttribute("aria-pressed", String(on)); label.textContent = on ? "השהה מוסיקה" : "נגן מוסיקה"; };
   const fadeTo = (target, ms) => {
@@ -120,25 +116,10 @@ if (musicBtn) {
     };
     requestAnimationFrame(step);
   };
-  const start = async () => {
-    try { await audio.play(); show(true); fadeTo(MUSIC_VOLUME, 3000); return true; }
-    catch { show(false); return false; }
-  };
-  const stop = () => { show(false); fadeTo(0, 600); };
-
-  const firstGesture = (e) => {
-    if (musicBtn.contains(e.target)) return; // the button handles itself
-    removeGestureListeners();
-    if (!stoppedByVisitor && audio.paused) start();
-  };
-  const gestures = ["pointerdown", "keydown", "touchstart"];
-  const removeGestureListeners = () => gestures.forEach((g) => document.removeEventListener(g, firstGesture, true));
-
-  start().then((ok) => { if (!ok) gestures.forEach((g) => document.addEventListener(g, firstGesture, true)); });
-
-  musicBtn.addEventListener("click", () => {
-    if (musicBtn.getAttribute("aria-pressed") === "true") { stoppedByVisitor = true; stop(); }
-    else { stoppedByVisitor = false; removeGestureListeners(); start(); }
+  musicBtn.addEventListener("click", async () => {
+    if (!audio) { audio = new Audio(musicBtn.dataset.src); audio.loop = true; audio.volume = 0; }
+    if (musicBtn.getAttribute("aria-pressed") === "true") { show(false); fadeTo(0, 600); return; }
+    show(true);
+    try { await audio.play(); fadeTo(MUSIC_VOLUME, 3000); } catch { show(false); }
   });
 }
-
