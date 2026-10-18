@@ -102,7 +102,7 @@ document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 // Music: on by default. Browsers block sound until the visitor interacts with the page,
 // so we try at once and otherwise start on the first tap, click or key press (not on the button itself).
 const musicBtn = document.getElementById("music");
-const MUSIC_VOLUME = 0.12; // quiet, in the background
+const MUSIC_VOLUME = 0.06; // very quiet, in the background
 if (musicBtn) {
   const audio = new Audio(musicBtn.dataset.src);
   audio.loop = true;
