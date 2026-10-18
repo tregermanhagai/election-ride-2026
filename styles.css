@@ -196,6 +196,8 @@ body:has(.music) .hero__credit { bottom: 72px; }
 }
 
 @media (max-width: 760px) {
+  .wordmark { font-size: 1.5rem; }
+  .btn--top { font-size: var(--step-body); padding: 14px 24px; }
   .steps { row-gap: 40px; }
   .step:nth-child(2) { margin-inline-start: 6vw; }
   .step:nth-child(3) { margin-inline-start: 12vw; }

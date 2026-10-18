@@ -101,6 +101,7 @@ document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
 // Music toggle: nothing loads or plays until the visitor presses the button
 const musicBtn = document.getElementById("music");
+const MUSIC_VOLUME = 0.12; // quiet, in the background
 if (musicBtn) {
   let audio, fadeId = 0;
   const label = musicBtn.querySelector(".music__label");
@@ -120,7 +121,7 @@ if (musicBtn) {
     musicBtn.setAttribute("aria-pressed", String(on));
     label.textContent = on ? "השהה מוסיקה" : "נגן מוסיקה";
     if (on) {
-      try { await audio.play(); fadeTo(0.35, 2000); }
+      try { await audio.play(); fadeTo(MUSIC_VOLUME, 3000); }
       catch { musicBtn.setAttribute("aria-pressed", "false"); label.textContent = "נגן מוסיקה"; }
     } else {
       fadeTo(0, 600);
